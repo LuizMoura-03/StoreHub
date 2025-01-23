@@ -2,12 +2,10 @@ package com.exercicio.StoreHub.controllers;
 
 import com.exercicio.StoreHub.models.ProductModel;
 import com.exercicio.StoreHub.services.ProductoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,10 @@ public class ProductController {
         return productoService.getProductById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductModel> creatProduct(@Valid @RequestBody ProductModel productModel) {
+        return ResponseEntity.ok(productoService.creatProduct(productModel));
     }
 }
