@@ -22,7 +22,19 @@ public class ProductoService {
         return productRepository.findById(id);
     }
 
-    public ProductModel creatProduct(ProductModel productModel) {
-        return productRepository.save(productModel);
+    public ProductModel creatProduct(ProductModel product) {
+        return productRepository.save(product);
     }
+
+    public ProductModel updateProduct(Long id, ProductModel updateProduct) {
+        return productRepository.findById(id).map(product -> {
+            product.setName(updateProduct.getName());
+            product.setDescricao(updateProduct.getDescricao());
+            product.setPreco(updateProduct.getPreco());
+            product.setEstoque(updateProduct.getEstoque());
+            product.setCategoria(updateProduct.getCategoria());
+            return productRepository.save(product);
+        }).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    }
+
 }
