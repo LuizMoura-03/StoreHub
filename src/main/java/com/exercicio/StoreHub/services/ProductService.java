@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductoService {
+public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
@@ -22,8 +22,8 @@ public class ProductoService {
         return productRepository.findById(id);
     }
 
-    public ProductModel creatProduct(ProductModel product) {
-        return productRepository.save(product);
+    public List<ProductModel> createProduct(List<ProductModel> productModels) {
+        return productRepository.saveAll(productModels);
     }
 
     public ProductModel updateProduct(Long id, ProductModel updateProduct) {
