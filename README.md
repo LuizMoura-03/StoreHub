@@ -174,8 +174,8 @@ JDBC URL: jdbc:h2:mem:storehubdb
 ## **Diagrama UML de Classes**
 **Abaixo está o diagrama UML de classes que representa a estrutura do projeto:**
 
-![Diagrama de Classes - StoreHub](src/main/resources/docs/DiagramaDeClasseStoreHub.png)
- 
+![Diagrama de Classes - StoreHub](src/main/resources/docs/DiagramaDeClasse(StoreHub).png)
+
 *Explicação do Diagrama*
 
   **1. ProductController:**
