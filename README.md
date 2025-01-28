@@ -156,7 +156,7 @@ JDBC URL: jdbc:h2:mem:storehubdb
 }
 
 
-5. Excluir Produto
+ 5. Excluir Produto
    Método: DELETE
    URL: http://localhost:8085/products/{id}
    Descrição: Remove um produto do sistema.
@@ -169,4 +169,58 @@ JDBC URL: jdbc:h2:mem:storehubdb
 * O preço do produto é obrigatório e deve ser maior que zero.
 * A quantidade em estoque é obrigatória e deve ser maior ou igual a zero.
 * A categoria do produto é obrigatória e deve ser uma das opções válidas (ex.: ELETRONICOS, ROUPAS, ALIMENTOS).
+
+
+## **Diagrama UML de Classes**
+**Abaixo está o diagrama UML de classes que representa a estrutura do projeto:**
+
+![Diagrama de Classes - StoreHub](src/main/resources/docs/Diagrama_de_classe_StoreHub.png)
+ 
+*Explicação do Diagrama*
+
+  **1. ProductController:**
+
+  É o ponto de entrada da aplicação para lidar com requisições HTTP relacionadas a produtos.
+  
+**Ligação:** Depende do ProductService para realizar as operações de negócio. Ele chama os métodos do ProductService para
+buscar, criar, atualizar ou deletar produtos
+
+   **2. ProductService:**
+
+  Contém a lógica de negócios para manipular os produtos.
+
+ **Ligação:** Depende do ProductRepository para acessar o banco de dados. Ele utiliza o ProductRepository para realizar 
+ operações como salvar, buscar, atualizar e deletar produtos no banco de dados.
+
+  **3. ProductRepository:**
+
+  É uma interface que estende o JpaRepository do Spring Data JPA.
+
+  **Ligação:**  Está diretamente conectado ao ProductModel, pois manipula a entidade ProductModel no banco de dados.
+  Ele fornece métodos prontos para persistir e recuperar dados.
+
+  **4. ProductModel:**
+
+  Representa a entidade Product no banco de dados.
+
+  **Ligação:**  Está relacionado ao ProductRepository, que é responsável por salvar e recuperar instâncias
+  dessa classe no banco de dados.
+
+  **Ligação:**  Possui um atributo chamado categoria, que é do tipo CategoriaProduto (um Enum).
+
+  **5. CategoriaProduto:**
+
+  É um Enum que define as categorias possíveis para os produtos(ELETRONICOS, ROUPAS e ALIMENTOS).
+
+  **Ligação:** Está relacionado ao ProductModel através do atributo categoria. Cada produto deve ter uma
+  categoria definida com base nesse Enum.
+
+ ## Resumo das Ligações ## 
+ *ProductController -> ProductService: O ProductController chama os métodos do ProductService para realizar as operações de negócio.
+ 
+*ProductService -> ProductRepository: O ProductService utiliza o ProductRepository para acessar o banco de dados.
+ 
+*ProductRepository -> ProductModel: O ProductRepository manipula diretamente a entidade ProductModel no banco de dados.
+ 
+*ProductModel -> CategoriaProduto: O ProductModel possui um atributo chamado categoria, que é do tipo CategoriaProduto.
 
